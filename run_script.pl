@@ -13,11 +13,11 @@ sub print_output {
 	$l_shoes = length($key);
 
 	if ( $l_shoes >= 16 ) {
-	    print "$key\t$run{$key}km\n";
+	    printf("%s\t%4.1fkm\n",$key,$run{$key});
 	} elsif ( $l_shoes >= 8 ) {
-	    print "$key\t\t$run{$key}km\n";
+	    printf("%s\t\t%4.1fkm\n",$key,$run{$key});
 	} else {
-	    print "$key\t\t\t$run{$key}km\n";
+	    printf("%s\t\t\t%4.1fkm\n",$key,$run{$key});
 	}
     }
     return;
