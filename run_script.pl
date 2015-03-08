@@ -10,15 +10,12 @@ if ( length($d) == 1 ) { $d = "0".$d; } # two digits format
 
 sub print_output {
     foreach $key ( keys %run) {
-	$l_shoes = length($key);
+	my $l_shoes = length($key);
+	my $l_run = length( sprintf "%.1f", $run{$key} );
+	my $nspace = 36 - ($l_shoes + $l_run);
+	my $whitespaces = " " x $nspace;
 
-	if ( $l_shoes >= 16 ) {
-	    printf("%s\t%4.1fkm\n",$key,$run{$key});
-	} elsif ( $l_shoes >= 8 ) {
-	    printf("%s\t\t%4.1fkm\n",$key,$run{$key});
-	} else {
-	    printf("%s\t\t\t%4.1fkm\n",$key,$run{$key});
-	}
+	printf("%s%s%.1f km\n",$key,$whitespaces,$run{$key});
     }
     return;
 }
@@ -27,15 +24,13 @@ sub write_file {
     open(my $fo, '>>', $dir.$filename)
 	or die "Could not open file '$filename' $!";
     
-    $l_shoes = length($shoes_name);
-    
-    if ( $l_shoes >= 16 ) {
-	printf $fo "$shoes_name\t$s_km\t$d.$m.$y\n";
-    } elsif ( $l_shoes >= 8 ) {
-	printf $fo "$shoes_name\t\t$s_km\t$d.$m.$y\n";
-    } else {
-	printf $fo "$shoes_name\t\t\t$s_km\t$d.$m.$y\n";
-    }
+    my $l_shoes = length($shoes_name);
+    my $l_run = length( sprintf "%.1f", $s_km );
+    my $nspace = 36 - ($l_shoes + $l_run);
+    my $whitespaces = " " x $nspace;
+
+    printf $fo ("%s%s%.1f\t%s.%s.%s\n",$shoes_name,$whitespaces,$s_km,$d,$m,$y);
+
     return;
 }
 
