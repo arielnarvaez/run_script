@@ -86,7 +86,7 @@ if (-e $dir.$filename) {
 
     } elsif ($s_shoes == 0) {
 	print_output;
-    } else {
+    } elsif ($s_shoes < $n && $s_shoes > 0) {
 	print "\nEnter the distance (km) ran by the shoes $shoes_list[$s_shoes-1]: ";
 	$s_km = <>;
 	chomp $s_km;
@@ -100,6 +100,8 @@ if (-e $dir.$filename) {
 	
 	# write file
 	write_file;
+    } else {
+	print "Not a valid option!\n" and exit; 
     }
 
 } else {
